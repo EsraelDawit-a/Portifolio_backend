@@ -1,7 +1,15 @@
 from django.db import models
 from django.db.models import fields
 from rest_framework import serializers
-from .models import SocialLink, Email, Service, Location, ContactMethod,VistedPlace, Skill,Project
+from .models import SocialLink, Email, Service, Location, ContactMethod,VistedPlace, Skill,Project,User
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['availabele_for_work', 'phone_no',"profile_image",'first_name', 'last_name','email','location','cv']
+        read_only_fields = ['availabele_for_work', 'phone_no',"profile_image",'last_login', 'date_joined','is_active', 'is_staff', 'is_superuser',
+                                     'groups', 'user_permissions','first_name', 'last_name','email', 'password','location','cv']
 
 class ProjectSerialaizer(serializers.ModelSerializer):
     class Meta:
@@ -25,7 +33,7 @@ class ContactMethodSerialaizer(serializers.ModelSerializer):
         model = ContactMethod
         fields = "__all__"
 
-class VissitedPlacesSerialaizer(serializers.ModelSerializer):
+class VisitedPlacesSerialaizer(serializers.ModelSerializer):
     class Meta:
         model = VistedPlace
         fields = "__all__"

@@ -11,7 +11,9 @@ class User(AbstractUser):
   email = models.EmailField(_('email address'), unique = True)
   availabele_for_work = models.BooleanField(default=True)
   phone_no = models.CharField(max_length = 10)
-
+  location = models.CharField(max_length = 200)
+  profile_image = models.ImageField(upload_to = "images/profile_images" ,default = "images/project_images/logo3.png")
+  cv = models.FileField(upload_to="fiels",blank=False,default = "images/project_images/logo3.png",null=False)
   USERNAME_FIELD = 'email'
   REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 

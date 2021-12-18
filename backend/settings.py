@@ -44,8 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders',
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', #add this Line to allow Request from Frontend Server Requests
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -77,7 +81,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
-
+CORS_ORIGIN_ALLOW_ALL=False
+CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000"
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

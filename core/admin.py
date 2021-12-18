@@ -14,7 +14,7 @@ class UserAdmin(BaseUserAdmin):
       (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                      'groups', 'user_permissions')}),
       (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-        (_('user_info'), {'fields': ('availabele_for_work', 'phone_no')}),
+        (_('user_info'), {'fields': ('availabele_for_work', 'phone_no',"profile_image",'location')}),
   )
   add_fieldsets = (
       (None, {
@@ -22,8 +22,8 @@ class UserAdmin(BaseUserAdmin):
           'fields': ('email', 'password1', 'password2'),
       }),
   )
-  list_display = ['email', 'first_name', 'last_name', 'is_staff', "availabele_for_work", "phone_no"]
-  search_fields = ('email', 'first_name', 'last_name')
+  list_display = ['email', 'first_name', 'last_name', 'is_staff', "availabele_for_work", "phone_no","profile_image",'location']
+  search_fields = ('email', 'first_name', 'last_name','location')
   ordering = ('email', )
 
 

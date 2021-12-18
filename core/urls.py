@@ -12,6 +12,7 @@ router.register(r'email', EmailViewSet, basename='email')
 router.register(r'social_link', SocialLinkViewSet, basename='social_link')
 router.register(r'service', ServiceViewSet, basename='service')
 router.register(r'places', VistedPlaceViewSet, basename='visited_places')
+router.register(r'user',UserViewSet,basename="user")
 
 urlpatterns = [
     path('projects',ProjectView.as_view(),name="projects")

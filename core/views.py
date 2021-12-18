@@ -1,11 +1,12 @@
 from django.core.checks import messages
+from django.core.exceptions import SuspiciousOperation
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from rest_framework import serializers, views, viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
-from .models import SocialLink, Email, Service, Location, ContactMethod,VistedPlace, Skill,Project
-from .serializers import ContactMethodSerialaizer, EmailSerialaizer, LocationSerialaizer, ProjectSerialaizer, ServiceSerialaizer, SkillSerialaizer, SocialLinkSerialaizer, VissitedPlacesSerialaizer
+from .models import SocialLink, Email, Service, Location, ContactMethod,VistedPlace, Skill,Project,User
+from .serializers import ContactMethodSerialaizer, EmailSerialaizer, LocationSerialaizer, ProjectSerialaizer, ServiceSerialaizer, SkillSerialaizer, SocialLinkSerialaizer, UserSerializer, VisitedPlacesSerialaizer
 from rest_framework.views import APIView
 from collections import defaultdict
 
@@ -49,6 +50,10 @@ class ProjectView(APIView):
 class SkillViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillSerialaizer
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 class SocialLinkViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = SocialLink.objects.all()
@@ -79,7 +84,7 @@ class EmailViewSet(viewsets.ModelViewSet):
             return Response("message Sent")
         except Exception as e:
             print(e)
-            return Response("sorry Unable to send Message! Try Again!")
+            raise SuspiciousOperation("Invalid Data!")
 
 class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Service.objects.all()
@@ -95,7 +100,7 @@ class ContactMethodViewSet(viewsets.ReadOnlyModelViewSet):
 
 class VistedPlaceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = VistedPlace.objects.all()
-    serializer_class = VissitedPlacesSerialaizer
+    serializer_class = VisitedPlacesSerialaizer
 
 
 
